@@ -8,7 +8,6 @@ function connect() {
     const util = require("util");
 
     pool = mysql.createPool({
-      // host: keys.ip,
       user: keys.user,
       password: keys.password,
       database: keys.schema,
