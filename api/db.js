@@ -11,7 +11,7 @@ function connect() {
       user: keys.user,
       password: keys.password,
       database: keys.schema,
-      socketPath: "/cloudsql/sidekickweb3:us-central1:sidekick2"
+      socketPath: keys.socketPath
     });
     query = util.promisify(pool.query).bind(pool);
   } else {
