@@ -1,0 +1,1 @@
+exports.clan = require("./clan");
