@@ -7,7 +7,7 @@ Install [node](https://nodejs.org/en/)
 Install Next.js and React
 
 ```
-npm install next react react-dom
+npm install
 ```
 
 Start it up

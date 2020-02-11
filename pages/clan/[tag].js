@@ -35,16 +35,16 @@ const useStyles = makeStyles(theme => ({
 const Clan = props => {
   const router = useRouter();
   const classes = useStyles();
-  var clanTag = router.query.tag;
-  if (clanTag == undefined) return <div>No clan tag</div>;
 
+  var clanTag = router.query.tag || "";
   clanTag = clanTag.replace("#", "");
+
   const url = constants.baseURL + "/clan?tag=" + clanTag;
   const { data, error } = useSWR(url, fetcher);
   if (error)
     return (
       <Layout>
-        <div>Clan tag {email} not found in Sidekick</div>
+        <div>Clan tag {clanTag} not found in Sidekick</div>
       </Layout>
     );
   if (!data)
