@@ -10,11 +10,6 @@ const Header = props => {
               <a>Home</a>
             </Link>
           </li>
-          <li>
-            <Link href="/clan/[tag]">
-              <a>Clan</a>
-            </Link>
-          </li>
         </ul>
       </nav>
       <style jsx>{`

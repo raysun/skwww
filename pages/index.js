@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import Layout from "../components/layout";
-import { useRouter } from "next/router";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Link from "next/link";
 
 const Home = () => {
-  const router = useRouter();
   const [values, setValues] = useState({
     clanTag: "y9llc99r"
   });
@@ -14,12 +12,6 @@ const Home = () => {
   const handleInputChange = e => {
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
-  };
-
-  const go = () => {
-    const { clanTag } = values;
-    if (!clanTag) return;
-    router.push(`/clan/${clanTag}`);
   };
 
   return (
