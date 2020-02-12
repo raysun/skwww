@@ -10,8 +10,9 @@ Install Next.js and React
 npm install
 ```
 
-Start it up
+Start the web server
 
 ```
 npm run dev
 ```
+
