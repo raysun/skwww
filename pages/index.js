@@ -1,6 +1,5 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
-const https = require("https");
 import useSWR from "swr";
 import fetcher from "../components/Fetcher";
 

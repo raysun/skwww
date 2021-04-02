@@ -14,14 +14,16 @@ export default async (req, res) => {
     timezone: "+00:00",
   });
 
+  const tag = req.query.tag;
   var response = "";
   await pool.query(
-    "select * from player where name = 'mathsman' and clan_name = 'Reddit'",
+    `select * from player_all where clan_tag = '#${tag}'`,
     (error, results, fields) => {
       if (error) throw error;
-      response = results[0].tag;
+      // response = results[0].tag;
       res.statusCode = 200;
-      res.json({ name: response });
+      res.json({ members: results });
+      // res.json({ name: response });
     }
   );
 };
