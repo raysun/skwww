@@ -29,7 +29,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Clash Sidekick</h1>
-        <h2>{data.name}</h2>
+        <h2>{data.tag}</h2>
         <p className={styles.description}>
           Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
