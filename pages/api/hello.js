@@ -12,7 +12,7 @@ export default (req, res) => {
     timezone: "+00:00",
   });
 
-  response = "";
+  var response = "";
   pool.query("SELECT 1 + 1 AS solution", function (error, results, fields) {
     if (error) throw error;
     response = results[0].solution;
