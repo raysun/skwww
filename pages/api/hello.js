@@ -13,10 +13,12 @@ export default (req, res) => {
   });
 
   var response = "";
-  pool.query("SELECT 1 + 1 AS solution", function (error, results, fields) {
-    if (error) throw error;
-    response = results[0].solution;
-  });
-
-  res.json({ name: response });
+  pool.query(
+    "select * from player where name = 'mathsman' and clan_name = 'Reddit'",
+    function (error, results, fields) {
+      if (error) throw error;
+      response = results[0].tag;
+      res.json({ name: response });
+    }
+  );
 };
