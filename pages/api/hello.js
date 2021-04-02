@@ -2,6 +2,10 @@
 var mysql = require("mysql");
 
 export default async (req, res) => {
+  if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+  }
+
   res.statusCode = 200;
 
   var pool = mysql.createPool({
@@ -15,7 +19,7 @@ export default async (req, res) => {
   var response = "";
   await pool.query(
     "select * from player where name = 'mathsman' and clan_name = 'Reddit'",
-    function (error, results, fields) {
+    (error, results, fields) => {
       if (error) throw error;
       response = results[0].tag;
       res.json({ name: response });

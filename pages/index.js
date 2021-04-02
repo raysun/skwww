@@ -1,7 +1,24 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
+const https = require("https");
+import useSWR from "swr";
+import fetcher from "../components/fetcher";
 
 export default function Home() {
+  const apiURL = `/api/hello`;
+  const { data, error } = useSWR(apiURL, fetcher, {
+    revalidateOnFocus: false,
+  });
+  if (error) return <div>Error</div>;
+  if (!data)
+    return (
+      <>
+        <h1>Clash Sidekick</h1>
+        <div>Loading...</div>
+      </>
+    );
+  console.log(data);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,7 +28,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Clash Sidekick</h1>
-
+        <h2>{data.name}</h2>
         <p className={styles.description}>
           Get started by editing{" "}
           <code className={styles.code}>pages/index.js</code>
