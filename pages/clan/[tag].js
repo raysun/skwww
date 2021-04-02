@@ -2,6 +2,7 @@ import React from "react";
 import fetcher from "../../components/Fetcher";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import styles from "../../styles/Home.module.css";
 
 const Clan = (props) => {
   const router = useRouter();
@@ -13,33 +14,29 @@ const Clan = (props) => {
   if (error) return <div>Error</div>;
   if (!data)
     return (
-      <>
-        <h1>Clan Page</h1>
-        <h3>{tag}</h3>
-        <div>Loading...</div>
-      </>
+      <div className={styles.container}>
+        <main className={styles.main}>
+          <h1 className={styles.title}>Loading...</h1>
+        </main>
+      </div>
     );
 
   console.log(data);
   const members = data.members;
   const clan_name = members[0].clan_name;
   return (
-    <>
-      <h1>{clan_name}</h1>
-      <ul>
-        {members.map((member) => (
-          <li key={member.name}>
-            {member.tag} {member.name} {member.clan_tag}
-          </li>
-        ))}
-      </ul>
-
-      <style jsx>{`
-        li {
-          margin-bottom: 0.5rem;
-        }
-      `}</style>
-    </>
+    <div className={styles.container}>
+      <main className={styles.main}>
+        <h1 className={styles.title}>{clan_name}</h1>
+        <ul>
+          {members.map((member) => (
+            <li key={member.name}>
+              {member.tag} {member.name}
+            </li>
+          ))}
+        </ul>
+      </main>
+    </div>
   );
 };
 
