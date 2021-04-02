@@ -2,7 +2,7 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 const https = require("https");
 import useSWR from "swr";
-import fetcher from "../components/fetcher";
+import fetcher from "../components/Fetcher";
 
 export default function Home() {
   const apiURL = `/api/hello`;
