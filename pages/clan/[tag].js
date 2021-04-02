@@ -14,7 +14,7 @@ const Clan = (props) => {
   if (!data)
     return (
       <>
-        <h1>Clan</h1>
+        <h1>Clan Page</h1>
         <h3>{tag}</h3>
         <div>Loading...</div>
       </>
