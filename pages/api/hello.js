@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 var mysql = require("mysql");
 
-export default (req, res) => {
+export default async (req, res) => {
   res.statusCode = 200;
 
   var pool = mysql.createPool({
@@ -13,7 +13,7 @@ export default (req, res) => {
   });
 
   var response = "";
-  pool.query(
+  await pool.query(
     "select * from player where name = 'mathsman' and clan_name = 'Reddit'",
     function (error, results, fields) {
       if (error) throw error;
