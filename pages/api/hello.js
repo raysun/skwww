@@ -4,7 +4,7 @@ var mysql = require("mysql");
 export default (req, res) => {
   res.statusCode = 200;
 
-  pool = mysql.createPool({
+  var pool = mysql.createPool({
     host: process.env.SK_PROD_IP,
     user: process.env.SK_USER,
     password: process.env.SK_PASSWORD,
