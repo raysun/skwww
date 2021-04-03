@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import Layout from "../components/layout";
 import AccessDenied from "../components/access-denied";
+import useSWR from "swr";
+import fetcher from "../components/Fetcher";
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -22,6 +24,7 @@ export default function Page() {
       </div>
     );
   console.log(data);
+  console.log(session);
 
   // Fetch content from protected route
   // useEffect(() => {
@@ -54,6 +57,7 @@ export default function Page() {
       <p>
         <strong>{data || "\u00a0"}</strong>
       </p>
+      <p>{session}</p>
     </Layout>
   );
 }
