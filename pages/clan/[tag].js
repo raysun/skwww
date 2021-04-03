@@ -4,7 +4,7 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import styles from "../../styles/Home.module.css";
 
-const Clan = (props) => {
+const Clan = () => {
   const router = useRouter();
 
   const tag = router.query.tag;
