@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import Layout from "../components/layout";
 import AccessDenied from "../components/access-denied";
+import styles from "../styles/Home.module.css";
 import useSWR from "swr";
 import fetcher from "../components/Fetcher";
 
