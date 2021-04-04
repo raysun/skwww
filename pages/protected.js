@@ -38,6 +38,7 @@ export default function Page() {
       <p>
         <strong>{content || "\u00a0"}</strong>
       </p>
+      <p>{session}</p>
     </Layout>
   );
 }
