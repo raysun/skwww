@@ -16,7 +16,7 @@ export default async (req, res) => {
       `select * from player_all where discord_id = '${token.sub}'`
     );
     res.statusCode = 200;
-    res.json({ members: results });
+    res.json({ players: results });
   } else {
     res.send({
       error: "You must be sign in to view the protected content on this page.",

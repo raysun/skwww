@@ -8,15 +8,15 @@ import styles from "../styles/Home.module.css";
 
 export default function Page() {
   const [session, loading] = useSession();
-  const [content, setContent] = useState();
+  const [players, setPlayers] = useState();
 
   // Fetch content from protected route
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("/api/examples/protected");
+      const res = await fetch("/api/clan");
       const json = await res.json();
-      if (json.content) {
-        setContent(json.content);
+      if (json.players) {
+        setPlayers(json.players);
       }
     };
     fetchData();
@@ -34,33 +34,14 @@ export default function Page() {
     );
   }
 
-  // const router = useRouter();
-  // const tag = router.query.tag;
-  const apiURL = `/api/clan`;
-  // console.log(apiURL);
-  const { data, error } = useSWR(apiURL, fetcher, {
-    revalidateOnFocus: false,
-  });
-  if (error) return <div>Error</div>;
-  if (!data)
-    return (
-      <div className={styles.container}>
-        <main className={styles.main}>
-          <h1 className={styles.title}>Loading...</h1>
-        </main>
-      </div>
-    );
-
-  console.log(data);
-  const members = data.members;
-  const clan_name = members[0].clan_name;
+  const clan_name = players[0].clan_name;
   return (
     <Layout>
       <div className={styles.container}>
         <main className={styles.main}>
           <h1 className={styles.title}>{clan_name}</h1>
           <ul>
-            {members.map((member) => (
+            {players.map((member) => (
               <li key={member.name}>
                 {member.tag} {member.name}
               </li>
