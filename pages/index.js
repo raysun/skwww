@@ -5,21 +5,21 @@ import fetcher from "../components/Fetcher";
 import Layout from "../components/layout";
 
 export default function Home() {
-  const apiURL = `/api/hello`;
-  const { data, error } = useSWR(apiURL, fetcher, {
-    revalidateOnFocus: false,
-  });
-  if (error) return <div>Error</div>;
-  if (!data)
-    return (
-      <div className={styles.container}>
-        <main className={styles.main}>
-          <h1 className={styles.title}>Clash Sidekick</h1>
-          <h2>Loading...</h2>
-        </main>
-      </div>
-    );
-  console.log(data);
+  // const apiURL = `/api/hello`;
+  // const { data, error } = useSWR(apiURL, fetcher, {
+  //   revalidateOnFocus: false,
+  // });
+  // if (error) return <div>Error</div>;
+  // if (!data)
+  //   return (
+  //     <div className={styles.container}>
+  //       <main className={styles.main}>
+  //         <h1 className={styles.title}>Clash Sidekick</h1>
+  //         <h2>Loading...</h2>
+  //       </main>
+  //     </div>
+  //   );
+  // console.log(data);
 
   return (
     <Layout>
