@@ -1,4 +1,3 @@
-import { useSession, getSession } from "next-auth/client";
 import Layout from "../components/layout";
 
 export default function Page() {
@@ -6,14 +5,13 @@ export default function Page() {
   // populated on render without needing to go through a loading stage.
   // This is possible because of the shared context configured in `_app.js` that
   // is used by `useSession()`.
-  const [session, loading] = useSession();
 
   return (
     <Layout>
       <h1>Server Side Rendering</h1>
       <p>
         This page uses the universal <strong>getSession()</strong> method in{" "}
-        <strong>getServerSideProps()</strong>.{session}
+        <strong>getServerSideProps()</strong>.
       </p>
       <p>
         Using <strong>getSession()</strong> in{" "}

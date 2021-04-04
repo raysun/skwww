@@ -1,15 +1,12 @@
 import Layout from "../components/layout";
-import { useSession, getSession } from "next-auth/client";
 
 export default function Page() {
-  const [session, loading] = useSession();
   return (
     <Layout>
       <h1>Client Side Rendering</h1>
       <p>
         This page uses the <strong>useSession()</strong> React Hook in the{" "}
         <strong>&lt;Header/&gt;</strong> component.
-        {session}
       </p>
       <p>
         The <strong>useSession()</strong> React Hook is easy to use and allows
