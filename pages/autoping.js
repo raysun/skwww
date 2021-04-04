@@ -53,7 +53,6 @@ export default function Page() {
       <Layout>
         <div className={styles.container}>
           <main className={styles.main}>
-            <h1 className={styles.title}>Clash Sidekick</h1>
             <h2>Loading...</h2>
           </main>
         </div>
