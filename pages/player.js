@@ -26,7 +26,7 @@ export default function Page() {
   if (typeof window !== "undefined" && loading) return null;
 
   // If no session exists, display access denied message
-  if (!session || players.length == 0) {
+  if (!session || !players || players.length == 0) {
     return (
       <Layout>
         <AccessDenied />
