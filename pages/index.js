@@ -31,7 +31,7 @@ export default function Home() {
 
         <main className={styles.main}>
           <h1 className={styles.title}>Clash Sidekick</h1>
-          <h2>{data.tag}</h2>
+          {/* 
           <p className={styles.description}>
             Get started by editing{" "}
             <code className={styles.code}>pages/index.js</code>
@@ -66,18 +66,18 @@ export default function Home() {
                 Instantly deploy your Next.js site to a public URL with Vercel.
               </p>
             </a>
-          </div>
+          </div> */}
         </main>
 
         <footer className={styles.footer}>
-          <a
+          {/* <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
             target="_blank"
             rel="noopener noreferrer"
           >
             Powered by{" "}
             <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-          </a>
+          </a> */}
         </footer>
       </div>
     </Layout>

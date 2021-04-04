@@ -44,7 +44,7 @@ export default function Page() {
   const [session, loading] = useSession();
   // const [players, setPlayers] = useState();
 
-  const apiURL = `/api/autoping`;
+  const apiURL = `/api/me`;
   const { data, error } = useSWR(apiURL, fetcher);
   if (error) return <div>Error</div>;
   console.log("data", data);
@@ -59,27 +59,7 @@ export default function Page() {
         </div>
       </Layout>
     );
-  // Fetch content from protected route
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await fetch("/api/clan");
-  //     const json = await res.json();
-  //     if (json.players) {
-  //       setPlayers(json.players);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [session]);
 
-  // When rendering client side don't display anything until loading is complete
-  // if (
-  //   (typeof window !== "undefined" && loading) ||
-  //   !players ||
-  //   players.length == 0
-  // )
-  //   return null;
-
-  // If no session exists, display access denied message
   if (!session) {
     return (
       <Layout>
@@ -88,26 +68,25 @@ export default function Page() {
     );
   }
 
-  const pings = data.pings;
-  const discord_name = pings[0].discord_name;
+  const players = data.players;
+  const discord_name = players[0].discord_name;
   return (
     <Layout>
       <MuiThemeProvider theme={theme}>
         <MaterialTable
-          title="Auto-Pings"
+          title={discord_name}
           columns={[
-            { title: "Options", field: "options" },
+            { title: "Tag", field: "tag" },
             {
-              title: "Hours Remaining",
-              field: "hours_remaining",
-              type: "numeric",
+              title: "Name",
+              field: "name",
             },
             {
-              title: "Message",
-              field: "message",
+              title: "Clan",
+              field: "clan_name",
             },
           ]}
-          data={data.pings}
+          data={players}
           options={{
             draggable: false,
             headerStyle: {

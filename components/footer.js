@@ -1,6 +1,6 @@
-import Link from "next/link"
-import styles from "./footer.module.css"
-import { dependencies } from "../package.json"
+import Link from "next/link";
+import styles from "./footer.module.css";
+import { dependencies } from "../package.json";
 
 export default function Footer() {
   return (
@@ -8,9 +8,9 @@ export default function Footer() {
       <hr />
       <ul className={styles.navItems}>
         <li className={styles.navItem}>
-          <a href="https://next-auth.js.org">Documentation</a>
+          <a href="https://clashsidekick.com">clashsidekick.com</a>
         </li>
-        <li className={styles.navItem}>
+        {/* <li className={styles.navItem}>
           <a href="https://www.npmjs.com/package/next-auth">NPM</a>
         </li>
         <li className={styles.navItem}>
@@ -23,8 +23,8 @@ export default function Footer() {
         </li>
         <li className={styles.navItem}>
           <em>next-auth@{dependencies["next-auth"]}</em>
-        </li>
+        </li> */}
       </ul>
     </footer>
-  )
+  );
 }
