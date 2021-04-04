@@ -5,6 +5,7 @@ import AccessDenied from "../components/access-denied";
 // import useSWR from "swr";
 // import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
+import MaterialTable from "material-table";
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -23,10 +24,15 @@ export default function Page() {
   }, [session]);
 
   // When rendering client side don't display anything until loading is complete
-  if (typeof window !== "undefined" && loading) return null;
+  if (
+    (typeof window !== "undefined" && loading) ||
+    !players ||
+    players.length == 0
+  )
+    return null;
 
   // If no session exists, display access denied message
-  if (!session || !players || players.length == 0) {
+  if (!session) {
     return (
       <Layout>
         <AccessDenied />
@@ -40,7 +46,7 @@ export default function Page() {
     <Layout>
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1 className={styles.title}>{discord_name}'s players</h1>
+          <h1 className={styles.title}>{discord_name}'s' players</h1>
           <ul>
             {players.map((member) => (
               <li key={member.name}>
