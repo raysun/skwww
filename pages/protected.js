@@ -37,6 +37,7 @@ export default function Page() {
       <h1>Protected Page</h1>
       <p>
         <strong>{content || "\u00a0"}</strong>
+        {session.user.sub}
       </p>
     </Layout>
   );
