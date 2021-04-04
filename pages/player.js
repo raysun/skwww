@@ -39,7 +39,7 @@ export default function Page() {
     <Layout>
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1 className={styles.title}>{clan_name}</h1>
+          <h1 className={styles.title}>{member.discord_name} players</h1>
           <ul>
             {players.map((member) => (
               <li key={member.name}>
