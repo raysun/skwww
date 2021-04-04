@@ -35,11 +35,12 @@ export default function Page() {
   }
 
   const clan_name = players[0].clan_name;
+  const discord_name = players[0].discord_name;
   return (
     <Layout>
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1 className={styles.title}>{member.discord_name} players</h1>
+          <h1 className={styles.title}>{discord_name}'s players</h1>
           <ul>
             {players.map((member) => (
               <li key={member.name}>
