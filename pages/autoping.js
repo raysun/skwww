@@ -94,7 +94,7 @@ export default function Page() {
     <Layout>
       <MuiThemeProvider theme={theme}>
         <MaterialTable
-          title="Auto-Pings"
+          title="Autopings"
           columns={[
             { title: "Options", field: "options" },
             {
@@ -124,9 +124,7 @@ export default function Page() {
           }}
           editable={{
             isEditable: (rowData) => true,
-            // isEditHidden: (rowData) => rowData.name === "x",
             isDeletable: (rowData) => true,
-            // isDeleteHidden: (rowData) => rowData.name === "y",
             onBulkUpdate: (changes) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {

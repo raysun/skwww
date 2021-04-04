@@ -70,7 +70,7 @@ export default function Header() {
               <a>Home</a>
             </Link>
           </li>
-          <li className={styles.navItem}>
+          {/* <li className={styles.navItem}>
             <Link href="/client">
               <a>Client</a>
             </Link>
@@ -79,17 +79,17 @@ export default function Header() {
             <Link href="/server">
               <a>Server</a>
             </Link>
-          </li>
+          </li> */}
           <li className={styles.navItem}>
-            <Link href="/player">
-              <a>Player</a>
+            <Link href="/autoping">
+              <a>Autoping</a>
             </Link>
           </li>
-          <li className={styles.navItem}>
+          {/* <li className={styles.navItem}>
             <Link href="/api-example">
               <a>API</a>
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </header>
