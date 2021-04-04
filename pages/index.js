@@ -58,7 +58,7 @@ export default function Home() {
       <MuiThemeProvider theme={theme}>
         <div className={styles.container}>
           <Head>
-            <title>Create Next App</title>
+            <title>Clash Sidekick</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
 

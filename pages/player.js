@@ -2,34 +2,50 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/client";
 import Layout from "../components/layout";
 import AccessDenied from "../components/access-denied";
-// import useSWR from "swr";
+import useSWR from "swr";
+import fetcher from "../components/Fetcher";
 // import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import MaterialTable from "material-table";
 
 export default function Page() {
   const [session, loading] = useSession();
-  const [players, setPlayers] = useState();
+  // const [players, setPlayers] = useState();
 
+  const apiURL = `/api/clan`;
+  const { data, error } = useSWR(apiURL, fetcher);
+  if (error) return <div>Error</div>;
+  console.log("data", data);
+  if (!data)
+    return (
+      <Layout>
+        <div className={styles.container}>
+          <main className={styles.main}>
+            <h1 className={styles.title}>Clash Sidekick</h1>
+            <h2>Loading...</h2>
+          </main>
+        </div>
+      </Layout>
+    );
   // Fetch content from protected route
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("/api/clan");
-      const json = await res.json();
-      if (json.players) {
-        setPlayers(json.players);
-      }
-    };
-    fetchData();
-  }, [session]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const res = await fetch("/api/clan");
+  //     const json = await res.json();
+  //     if (json.players) {
+  //       setPlayers(json.players);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [session]);
 
   // When rendering client side don't display anything until loading is complete
-  if (
-    (typeof window !== "undefined" && loading) ||
-    !players ||
-    players.length == 0
-  )
-    return null;
+  // if (
+  //   (typeof window !== "undefined" && loading) ||
+  //   !players ||
+  //   players.length == 0
+  // )
+  //   return null;
 
   // If no session exists, display access denied message
   if (!session) {
@@ -40,13 +56,15 @@ export default function Page() {
     );
   }
 
-  const clan_name = players[0].clan_name;
+  // const clan_name = players[0].clan_name;
+  // const discord_name = players[0].discord_name;
+  const players = data.players;
   const discord_name = players[0].discord_name;
   return (
     <Layout>
       <div className={styles.container}>
         <main className={styles.main}>
-          <h1 className={styles.title}>{discord_name}'s' players</h1>
+          <h1 className={styles.title}>{discord_name}'s players</h1>
           <ul>
             {players.map((member) => (
               <li key={member.name}>
