@@ -8,7 +8,7 @@ import fetcher from "../components/Fetcher";
 import styles from "../styles/Home.module.css";
 import MaterialTable from "material-table";
 import { MuiThemeProvider, Box, Paper, Avatar } from "@material-ui/core";
-import { theme } from "./theme/table-theme";
+import { theme } from "../../theme/table-theme";
 
 export default function Page() {
   const [session, loading] = useSession();
