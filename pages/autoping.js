@@ -7,42 +7,11 @@ import fetcher from "../components/Fetcher";
 // import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import MaterialTable from "material-table";
-import {
-  createMuiTheme,
-  MuiThemeProvider,
-  Box,
-  Paper,
-  Avatar,
-} from "@material-ui/core";
-
-const theme = createMuiTheme({
-  overrides: {
-    MuiTableSortLabel: {
-      root: {
-        color: "#fff",
-        "&:hover": {
-          color: "#fff",
-        },
-      },
-      active: {
-        color: "#fff !important",
-        "&:hover": {
-          color: "#fff",
-        },
-      },
-      icon: {
-        color: "#fff !important",
-        "&:hover": {
-          color: "#fff !important",
-        },
-      },
-    },
-  },
-});
+import { MuiThemeProvider, Box, Paper, Avatar } from "@material-ui/core";
+import { theme } from "./theme/table-theme";
 
 export default function Page() {
   const [session, loading] = useSession();
-  // const [players, setPlayers] = useState();
 
   const apiURL = `/api/autoping`;
   const { data, error } = useSWR(apiURL, fetcher);
@@ -58,27 +27,7 @@ export default function Page() {
         </div>
       </Layout>
     );
-  // Fetch content from protected route
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const res = await fetch("/api/clan");
-  //     const json = await res.json();
-  //     if (json.players) {
-  //       setPlayers(json.players);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [session]);
 
-  // When rendering client side don't display anything until loading is complete
-  // if (
-  //   (typeof window !== "undefined" && loading) ||
-  //   !players ||
-  //   players.length == 0
-  // )
-  //   return null;
-
-  // If no session exists, display access denied message
   if (!session) {
     return (
       <Layout>
@@ -171,31 +120,3 @@ export default function Page() {
     </Layout>
   );
 }
-
-// const clan_name = players[0].clan_name;
-// const discord_name = players[0].discord_name;
-// const players = data.players;
-// Players in clan
-// <div className={styles.container}>
-//   <main className={styles.main}>
-//     <h1 className={styles.title}>{discord_name}'s players</h1>
-//     <ul>
-//       {players.map((member) => (
-//         <li key={member.name}>
-//           {member.tag} {member.name}
-//         </li>
-//       ))}
-//     </ul>
-//   </main>
-// </div>;
-
-// // If session exists, display content
-// return (
-//   <Layout>
-//     <h1>Protected Page</h1>
-//     <p>
-//       <strong>{content || "\u00a0"}</strong>
-//     </p>
-//   </Layout>
-// );
-// }

@@ -7,38 +7,8 @@ import fetcher from "../components/Fetcher";
 // import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import MaterialTable from "material-table";
-import {
-  createMuiTheme,
-  MuiThemeProvider,
-  Box,
-  Paper,
-  Avatar,
-} from "@material-ui/core";
-
-const theme = createMuiTheme({
-  overrides: {
-    MuiTableSortLabel: {
-      root: {
-        color: "#fff",
-        "&:hover": {
-          color: "#fff",
-        },
-      },
-      active: {
-        color: "#fff !important",
-        "&:hover": {
-          color: "#fff",
-        },
-      },
-      icon: {
-        color: "#fff !important",
-        "&:hover": {
-          color: "#fff !important",
-        },
-      },
-    },
-  },
-});
+import { theme } from "./theme/table-theme";
+import { MuiThemeProvider, Box, Paper, Avatar } from "@material-ui/core";
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -152,31 +122,3 @@ export default function Page() {
     </Layout>
   );
 }
-
-// const clan_name = players[0].clan_name;
-// const discord_name = players[0].discord_name;
-// const players = data.players;
-// Players in clan
-// <div className={styles.container}>
-//   <main className={styles.main}>
-//     <h1 className={styles.title}>{discord_name}'s players</h1>
-//     <ul>
-//       {players.map((member) => (
-//         <li key={member.name}>
-//           {member.tag} {member.name}
-//         </li>
-//       ))}
-//     </ul>
-//   </main>
-// </div>;
-
-// // If session exists, display content
-// return (
-//   <Layout>
-//     <h1>Protected Page</h1>
-//     <p>
-//       <strong>{content || "\u00a0"}</strong>
-//     </p>
-//   </Layout>
-// );
-// }
