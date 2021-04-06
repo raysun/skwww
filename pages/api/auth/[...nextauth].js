@@ -13,6 +13,7 @@ export default NextAuth({
     Providers.Discord({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      scope: "identify guilds",
     }),
     // Providers.Email({
     //   server: process.env.EMAIL_SERVER,
