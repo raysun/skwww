@@ -6,6 +6,7 @@ const secret = process.env.SECRET;
 
 export default async (req, res) => {
   const session = await getSession({ req });
+  console.log(req, secret)
   const token = await jwt.getToken({ req, secret });
 
   if (session) {

@@ -1,8 +1,11 @@
 import { useSession } from "next-auth/client";
 import Layout from "../components/layout";
 import AccessDenied from "../components/access-denied";
+import NoLinkedPlayers from "../components/no-linked-players"
 import useSWR from "swr";
 import fetcher from "../components/Fetcher";
+import React, { useState } from "react";
+
 // import { useRouter } from "next/router";
 import styles from "../styles/Home.module.css";
 import MaterialTable from "material-table";
@@ -11,10 +14,13 @@ import { theme } from "../theme/table-theme";
 
 export default function Page() {
   const [session, loading] = useSession();
-
   const apiURL = `/api/autoping`;
   const { data, error } = useSWR(apiURL, fetcher);
-  if (error) return <div>Error</div>;
+  const x = data?.pings ?? [];
+  console.log(x, "thats it");
+    const [data2, setData] = useState([...x]);
+
+    if (error) return <div>Error</div>;
   console.log("data", data);
   if (!data)
     return (
@@ -36,7 +42,18 @@ export default function Page() {
   }
 
   const pings = data.pings;
+
+  if (pings.length === 0) {
+      console.log('no pings!')
+      return (
+          <Layout>
+              <NoLinkedPlayers />
+          </Layout>
+      )
+  }
   const discord_name = pings[0].discord_name;
+    console.log(x, pings, "thats it");
+
   return (
     <Layout>
       <MuiThemeProvider theme={theme}>
@@ -54,7 +71,7 @@ export default function Page() {
               field: "message",
             },
           ]}
-          data={data.pings}
+          data={data2}
           options={{
             draggable: false,
             headerStyle: {
@@ -75,8 +92,12 @@ export default function Page() {
             onBulkUpdate: (changes) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  /* setData([...data, newData]); */
-
+                  const newRows = Object.values(changes);
+                  for (let row in newRows) {
+                      const index = row[1].tableData.id;
+                      pings[index] = row[0]
+                  }
+                  setData([...pings]);
                   resolve();
                 }, 1000);
               }),
@@ -86,7 +107,8 @@ export default function Page() {
             onRowAdd: (newData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  /* setData([...data, newData]); */
+                  pings.push(newData);
+                  setData([...pings]);
 
                   resolve();
                 }, 1000);
@@ -94,21 +116,20 @@ export default function Page() {
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  const dataUpdate = [...data];
+                    console.log("new data");
                   const index = oldData.tableData.id;
-                  dataUpdate[index] = newData;
-                  setData([...dataUpdate]);
-
+                  pings[index] = newData;
+                  setData([...pings]);
                   resolve();
                 }, 1000);
               }),
             onRowDelete: (oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  const dataDelete = [...data];
+                  // const dataDelete = [...data];
                   const index = oldData.tableData.id;
-                  dataDelete.splice(index, 1);
-                  setData([...dataDelete]);
+                  pings.splice(index, 1);
+                  setData([...pings]);
 
                   resolve();
                 }, 1000);
