@@ -14,8 +14,9 @@ import { theme } from "../theme/table-theme";
 
 export default function Page() {
   const [session, loading] = useSession();
-  const apiURL = `/api/autoping`;
+  const apiURL = `/api/autoping/list`;
   const { data, error } = useSWR(apiURL, fetcher);
+  // const { data, error} = await fetch(apiURL).then(r => r.json());
   const x = data?.pings ?? [];
   console.log(x, "thats it");
     const [data2, setData] = useState([...x]);
