@@ -11,9 +11,9 @@ export default async (req, res) => {
   if (session) {
     const query = db.connect();
 
-    // const tag = req.query.tag;
+    const tag = req.query.tag;
     const results = await query(
-      `select * from player_all where discord_id = '${token.sub}'`
+      `select * from player_all where clan_tag = '#${tag}'`
     );
     res.statusCode = 200;
     res.json({ players: results });
