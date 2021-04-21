@@ -90,6 +90,11 @@ export default function Header() {
               <a>Autoping</a>
             </Link>
           </li>
+          <li className={styles.navItem}>
+            <Link href="/guilds">
+              <a>Guilds</a>
+            </Link>
+          </li>
           {/* <li className={styles.navItem}>
             <Link href="/api-example">
               <a>API</a>

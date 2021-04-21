@@ -14,12 +14,11 @@ import { theme } from "../theme/table-theme";
 
 export default function Page() {
   const [session, loading] = useSession();
-  const apiURL = `/api/autoping/list`;
+  const apiURL = `/api/autoping`;
   const { data, error } = useSWR(apiURL, fetcher);
-  // const { data, error} = await fetch(apiURL).then(r => r.json());
   const x = data?.pings ?? [];
   console.log(x, "thats it");
-    const [data2, setData] = useState([...x]);
+    // const [data2, setData] = useState([...x]);
 
     if (error) return <div>Error</div>;
   console.log("data", data);
@@ -72,7 +71,7 @@ export default function Page() {
               field: "message",
             },
           ]}
-          data={data2}
+          data={pings}
           options={{
             draggable: false,
             headerStyle: {
@@ -93,13 +92,14 @@ export default function Page() {
             onBulkUpdate: (changes) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                  const newRows = Object.values(changes);
-                  for (let row in newRows) {
-                      const index = row[1].tableData.id;
-                      pings[index] = row[0]
-                  }
-                  setData([...pings]);
-                  resolve();
+
+                  // const newRows = Object.values(changes);
+                  // for (let row in newRows) {
+                  //     const index = row[1].tableData.id;
+                  //     pings[index] = row[0]
+                  // }
+                  // setData([...pings]);
+                  // resolve();
                 }, 1000);
               }),
             onRowAddCancelled: (rowData) => console.log("Row adding cancelled"),
@@ -117,10 +117,11 @@ export default function Page() {
             onRowUpdate: (newData, oldData) =>
               new Promise((resolve, reject) => {
                 setTimeout(() => {
-                    console.log("new data");
-                  const index = oldData.tableData.id;
-                  pings[index] = newData;
-                  setData([...pings]);
+
+                    // console.log("new data");
+                  // const index = oldData.tableData.id;
+                  // pings[index] = newData;
+                  // setData([...pings]);
                   resolve();
                 }, 1000);
               }),
