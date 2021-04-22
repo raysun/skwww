@@ -13,7 +13,8 @@ export default async (req, res) => {
     const sql = postgres(postgresUri);
 
     if (session) {
-        const userId = token.picture.match('/([0-9]{15,20})?/g')
+        console.log(token)
+        const userId = token.picture.match('/([0-9]{15,20})?/')
         console.log(userId)
         const [results] = await sql`select * from accounts where provider_account_id = '230214242618441728'`
 
@@ -21,8 +22,8 @@ export default async (req, res) => {
 
         const auth = `Bearer ${results.access_token}`
         console.log(auth)
-        const guilds = fetch('https://discord.com/api/v8/users/@me/guilds', {method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: auth}}).then(res => res.json());
-        console.log(guilds);
+        const response = await fetch('https://discord.com/api/v8/users/@me/guilds', {method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: auth}});
+        const guilds = await response.json()
         res.statusCode = 200;
         res.json({ guilds: guilds });
     } else {
