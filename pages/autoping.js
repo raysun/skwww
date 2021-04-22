@@ -20,6 +20,7 @@ export default function Page() {
   console.log(x, "thats it");
     // const [data2, setData] = useState([...x]);
 
+
     if (error) return <div>Error</div>;
   console.log("data", data);
   if (!data)
