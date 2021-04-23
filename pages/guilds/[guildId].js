@@ -34,13 +34,38 @@ const Guild = () => {
         <Layout>
         <MuiThemeProvider theme={theme}>
             <MaterialTable
-                title={data.channels}
+                title={guildId}
                 columns={[
                     {title: "Clan Tag",  field: "clan_tag"},
                     {title: "War Enabled", field: "war"},
                     {title: "Feed Enabled", field: "feed"}
                 ]}
-                 data={data}
+                data={data.channels}
+                options={{
+                    draggable: false,
+                    headerStyle: {
+                        backgroundColor: "darkblue",
+                        position: "sticky",
+                        top: 0,
+                    },
+                    // maxBodyHeight: "calc(100vh - 341px)",
+                    search: false,
+                    // toolbar: false,
+                    pageSize: 25,
+                    pageSizeOptions: [10, 25, 50, 100],
+                    emptyRowsWhenPaging: false,
+                    cellStyle: {
+                        fontSize: "34pt",
+                        fontWeight: "bold",
+                        padding: "0%",
+                    },
+                }}
+                editable={{
+                    isEditable: (rowData) => false,
+                    isEditHidden: (rowData) => true,
+                    isDeletable: (rowData) => false,
+                    isDeleteHidden: (rowData) => true,
+                }}
             />
         </MuiThemeProvider>
         </Layout>
