@@ -21,6 +21,7 @@ export default function Page() {
 
     console.log(session);
     const guilds = data.guilds;
+    console.log(guilds)
 
     if (!guilds) return <div>No Servers</div>
 
