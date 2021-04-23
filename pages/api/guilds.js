@@ -41,15 +41,16 @@ export default async (req, res) => {
             const response = await fetch('https://discord.com/api/v8/users/@me/guilds', {method: 'GET', headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${new_access_token.access_token}`}});
             await sql`update accounts set access_token = ${new_access_token} where provider_account_id = '230214242618441728'`;
             const guilds = await response.json();
+            const only_manage_server = guilds.filter(arr => (arr.permissions & 0x20) === 0x20);
+
             res.statusCode = 200;
-            console.log(guilds)
-            res.json({ guilds: guilds });
+            res.json({ guilds: only_manage_server });
         }
         else {
             const guilds = await response.json();
             res.statusCode = 200;
-            console.log(guilds)
-            res.json({ guilds: guilds });
+            const only_manage_server = guilds.filter(arr => (arr.permissions & 0x20) === 0x20);
+            res.json({ guilds: only_manage_server });
         }
 
     } else {
