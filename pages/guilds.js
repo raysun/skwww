@@ -7,8 +7,11 @@ import fetcher from "../components/Fetcher";
 import styles from "../styles/Home.module.css";
 import MaterialTable from "material-table";
 import { theme } from "../theme/table-theme";
-import { MuiThemeProvider, Box, Paper, Avatar } from "@material-ui/core";
+import {MuiThemeProvider, Box, Paper, Avatar, GridList, GridListTile, GridListTileBar} from "@material-ui/core";
 import React from "react";
+
+const discordCDNBase = "https://cdn.discordapp.com/icons/"
+const skBlackAndWhiteAvatar = "https://cdn.discordapp.com/avatars/296718635513413632/52b80dbbe9ece30338ecc3733934795b.webp?size=1024"
 
 export default function Page() {
     const [session, loading] = useSession();
@@ -27,48 +30,16 @@ export default function Page() {
 
     return (
         <Layout>
-            <MuiThemeProvider theme={theme}>
-                <MaterialTable
-                    title="Servers"
-                    columns={[
-                        { title: "Name", field: "name" },
-                        {
-                            title: "ID",
-                            field: "id",
-                        },
-                        {
-                            title: "icon",
-                            field: "icon",
-                        }
-                    ]}
-                    data={guilds}
-                    options={{
-                        draggable: false,
-                        headerStyle: {
-                            backgroundColor: "darkblue",
-                            position: "sticky",
-                            top: 0,
-                        },
-                        // maxBodyHeight: "calc(100vh - 341px)",
-                        search: false,
-                        // toolbar: false,
-                        pageSize: 25,
-                        pageSizeOptions: [10, 25, 50, 100],
-                        emptyRowsWhenPaging: false,
-                        cellStyle: {
-                            fontSize: "34pt",
-                            fontWeight: "bold",
-                            padding: "0%",
-                        },
-                    }}
-                    editable={{
-                        isEditable: (rowData) => false,
-                        isEditHidden: (rowData) => true,
-                        isDeletable: (rowData) => false,
-                        isDeleteHidden: (rowData) => true,
-                    }}
-                />
-            </MuiThemeProvider>
+            <GridList theme={theme} cols={4} spacing={60}>
+                {guilds.map((guild) => (
+                    <GridListTile key={guild.id} href={"/guilds/" + guild.id} component={"a"}>
+                        <img src={guild.icon !== null ? (discordCDNBase + guild.id + "/" + guild.icon + ".webp?size=1024") : skBlackAndWhiteAvatar} alt={guild.name}/>
+                        <GridListTileBar
+                            title={guild.name} href="https://dyno.gg/account"
+                        />
+                    </GridListTile>
+                ))}
+            </GridList>
         </Layout>
     );
 };

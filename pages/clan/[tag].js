@@ -60,7 +60,6 @@ const Clan = () => {
       </div>
     );
 
-  console.log(data);
   const players = data.players;
   const clan_name = players[0].clan_name;
   return (

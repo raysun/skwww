@@ -12,9 +12,11 @@ export default async (req, res) => {
     const query = db.connect();
 
     const tag = req.query.tag;
+    console.log(tag)
     const results = await query(
       `select * from player_all where clan_tag = '#${tag}'`
     );
+    console.log(results)
     res.statusCode = 200;
     res.json({ players: results });
   } else {
