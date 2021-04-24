@@ -5,6 +5,11 @@
   width: 100%;
 }
 
+.title {
+  font-size: 22pt;
+  font-weight: bold;
+}
+
 .loading,
 .loaded {
   position: relative;

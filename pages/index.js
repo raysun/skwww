@@ -1,69 +1,93 @@
-import Head from "next/head";
-import styles from "../styles/Home.module.css";
+import { useSession } from "next-auth/client";
+import Layout from "../components/layout";
+import AccessDenied from "../components/access-denied";
 import useSWR from "swr";
 import fetcher from "../components/Fetcher";
-import Layout from "../components/layout";
+// import { useRouter } from "next/router";
+import styles from "../styles/Home.module.css";
+import MaterialTable from "material-table";
+import { theme } from "../theme/table-theme";
+import {
+  MuiThemeProvider,
+  Box,
+  Paper,
+  Avatar,
+  GridList,
+  GridListTile,
+  GridListTileBar, Grid,
+} from "@material-ui/core";
+import {makeStyles} from "@material-ui/core/styles";
+import React from "react";
 
-export default function Home() {
+const discordCDNBase = "https://cdn.discordapp.com/icons/";
+const skBlackAndWhiteAvatar =
+    "https://cdn.discordapp.com/avatars/296718635513413632/52b80dbbe9ece30338ecc3733934795b.webp";
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    padding: theme.spacing(1),
+    textAlign: "center",
+    color: theme.palette.text.secondary
+  }
+}));
+
+function GridItem({ classes }) {
   return (
-    <Layout>
-      <div className={styles.container}>
-        <Head>
-          <title>Clash Sidekick</title>
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+      // From 0 to 600px wide (smart-phones), I take up 12 columns, or the whole device width!
+      // From 600-690px wide (tablets), I take up 6 out of 12 columns, so 2 columns fit the screen.
+      // From 960px wide and above, I take up 25% of the device (3/12), so 4 columns fit the screen.
+      <Grid >
+      </Grid>
+  );
+}
 
-        <main className={styles.main}>
-          <h1 className={styles.title}>Clash Sidekick</h1>
-          {/* 
-          <p className={styles.description}>
-            Get started by editing{" "}
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <p></p>
 
-          <div className={styles.grid}>
-            <a href="https://nextjs.org/docs" className={styles.card}>
-              <h3>Documentation &rarr;</h3>
-              <p>Find in-depth information about Next.js features and API.</p>
-            </a>
+export default function Page() {
+  const [session, loading] = useSession();
+  // const [players, setPlayers] = useState();
 
-            <a href="https://nextjs.org/learn" className={styles.card}>
-              <h3>Learn &rarr;</h3>
-              <p>Learn about Next.js in an interactive course with quizzes!</p>
-            </a>
+  const apiURL = `/api/guilds`;
+  const { data, error } = useSWR(apiURL, fetcher, { revalidateOnFocus: false });
+  if (error) return <div>Error</div>;
+  if (!data) return <div>Loading...</div>;
 
-            <a
-              href="https://github.com/vercel/next.js/tree/master/examples"
-              className={styles.card}
-            >
-              <h3>Examples &rarr;</h3>
-              <p>Discover and deploy boilerplate example Next.js projects.</p>
-            </a>
+  console.log(session);
+  const guilds = data.guilds;
+  console.log(guilds);
 
-            <a
-              href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              className={styles.card}
-            >
-              <h3>Deploy &rarr;</h3>
-              <p>
-                Instantly deploy your Next.js site to a public URL with Vercel.
-              </p>
-            </a>
-          </div> */}
-        </main>
+  if (!guilds) return <div>No Servers</div>;
 
-        <footer className={styles.footer}>
-          {/* <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Powered by{" "}
-            <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-          </a> */}
-        </footer>
-      </div>
-    </Layout>
+  return (
+      <Layout>
+        <Grid container spacing={3}>
+          {guilds.map((guild) => (
+              <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={3}
+                  align={"center"}
+                  justify={"center"}
+                  key={guild.id}
+                  href={"/guilds/" + guild.id}
+                  component={"a"}
+              >
+                <img
+                    src={
+                      guild.icon !== null
+                          ? discordCDNBase +
+                          guild.id +
+                          "/" +
+                          guild.icon +
+                          ".webp"
+                          : skBlackAndWhiteAvatar
+                    }
+                    alt={guild.name}
+                />
+              </Grid>
+          ))}
+        </Grid>
+      </Layout>
   );
 }
