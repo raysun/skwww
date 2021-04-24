@@ -28,7 +28,7 @@ export default function Header() {
           !session && loading ? styles.loading : styles.loaded
         }`}
       >
-        <Grid container spacing="4">
+        <GridList container spacing="4">
           <Grid item>Clash Sidekick</Grid>
           {!session && (
             <Grid item container justify="flex-end">
@@ -76,7 +76,7 @@ export default function Header() {
               </Grid>
             </Grid>
           )}
-        </Grid>
+        </GridList>
       </p>
       <nav>
         <ul className={styles.navItems}>
