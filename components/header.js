@@ -88,7 +88,7 @@ export default function Header() {
             </Link>
           </li> */}
           <li className={styles.navItem}>
-            <Link href="/guilds">
+            <Link href="/">
               <a>Guilds</a>
             </Link>
           </li>
