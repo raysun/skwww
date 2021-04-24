@@ -29,7 +29,9 @@ export default function Header() {
         }`}
       >
         <GridList container spacing="4">
-          <Grid item>Clash Sidekick</Grid>
+          <Grid className={styles.title} item>
+            Clash Sidekick
+          </Grid>
           {!session && (
             <Grid item container justify="flex-end">
               <Grid item>You are not signed in</Grid>
@@ -51,10 +53,10 @@ export default function Header() {
             <Grid item container justify="flex-end">
               <Grid item>
                 {session.user.image && (
-                  <span
-                    style={{ backgroundImage: `url(${session.user.image})` }}
+                  <Avatar
                     className={styles.avatar}
-                  />
+                    src={session.user.image}
+                  ></Avatar>
                 )}
               </Grid>
               <Grid item>
