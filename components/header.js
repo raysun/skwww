@@ -1,6 +1,16 @@
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/client";
 import styles from "./header.module.css";
+import {
+  MuiThemeProvider,
+  Box,
+  Paper,
+  Avatar,
+  Grid,
+  GridList,
+  GridListTile,
+  GridListTileBar,
+} from "@material-ui/core";
 
 // The approach used in this component shows how to built a sign in and sign out
 // component that works on pages which support both client and server side
@@ -13,56 +23,61 @@ export default function Header() {
       <noscript>
         <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
       </noscript>
-      <div className={styles.signedInStatus}>
-        <p
-          className={`nojs-show ${
-            !session && loading ? styles.loading : styles.loaded
-          }`}
-        >
+      <p
+        className={`nojs-show ${
+          !session && loading ? styles.loading : styles.loaded
+        }`}
+      >
+        <Grid container spacing="4">
+          <Grid item>Clash Sidekick</Grid>
           {!session && (
-            <>
-              <span className={styles.notSignedInText}>
-                You are not signed in
-              </span>
-              <a
-                href={`/api/auth/signin`}
-                className={styles.buttonPrimary}
-                onClick={(e) => {
-                  e.preventDefault();
-                  signIn("discord");
-                }}
-              >
-                Sign in
-              </a>
-            </>
+            <Grid item container justify="flex-end">
+              <Grid item>You are not signed in</Grid>
+              <Grid item>
+                <a
+                  href={`/api/auth/signin`}
+                  className={styles.buttonPrimary}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signIn("discord");
+                  }}
+                >
+                  Sign in
+                </a>
+              </Grid>
+            </Grid>
           )}
           {session && (
-            <>
-              {session.user.image && (
-                <span
-                  style={{ backgroundImage: `url(${session.user.image})` }}
-                  className={styles.avatar}
-                />
-              )}
-              <span className={styles.signedInText}>
+            <Grid item container justify="flex-end">
+              <Grid item>
+                {session.user.image && (
+                  <span
+                    style={{ backgroundImage: `url(${session.user.image})` }}
+                    className={styles.avatar}
+                  />
+                )}
+              </Grid>
+              <Grid item>
                 <small>Signed in as</small>
                 <br />
                 <strong>{session.user.name}</strong>
-              </span>
-              <a
-                href={`/api/auth/signout`}
-                className={styles.button}
-                onClick={(e) => {
-                  e.preventDefault();
-                  signOut();
-                }}
-              >
-                Sign out
-              </a>
-            </>
+              </Grid>
+              <Grid item>
+                <a
+                  href={`/api/auth/signout`}
+                  className={styles.button}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    signOut();
+                  }}
+                >
+                  Sign out
+                </a>
+              </Grid>
+            </Grid>
           )}
-        </p>
-      </div>
+        </Grid>
+      </p>
       <nav>
         <ul className={styles.navItems}>
           <li className={styles.navItem}>
