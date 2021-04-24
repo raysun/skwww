@@ -14,34 +14,32 @@ import {
   Avatar,
   GridList,
   GridListTile,
-  GridListTileBar, Grid,
+  GridListTileBar,
+  Grid,
 } from "@material-ui/core";
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 
 const discordCDNBase = "https://cdn.discordapp.com/icons/";
 const skBlackAndWhiteAvatar =
-    "https://cdn.discordapp.com/avatars/296718635513413632/52b80dbbe9ece30338ecc3733934795b.webp";
-
+  "https://cdn.discordapp.com/avatars/296718635513413632/52b80dbbe9ece30338ecc3733934795b.webp";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     padding: theme.spacing(1),
     textAlign: "center",
-    color: theme.palette.text.secondary
-  }
+    color: theme.palette.text.secondary,
+  },
 }));
 
 function GridItem({ classes }) {
   return (
-      // From 0 to 600px wide (smart-phones), I take up 12 columns, or the whole device width!
-      // From 600-690px wide (tablets), I take up 6 out of 12 columns, so 2 columns fit the screen.
-      // From 960px wide and above, I take up 25% of the device (3/12), so 4 columns fit the screen.
-      <Grid >
-      </Grid>
+    // From 0 to 600px wide (smart-phones), I take up 12 columns, or the whole device width!
+    // From 600-690px wide (tablets), I take up 6 out of 12 columns, so 2 columns fit the screen.
+    // From 960px wide and above, I take up 25% of the device (3/12), so 4 columns fit the screen.
+    <Grid></Grid>
   );
 }
-
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -56,38 +54,34 @@ export default function Page() {
   const guilds = data.guilds;
   console.log(guilds);
 
-  if (!guilds) return <div>No Servers</div>;
-
   return (
-      <Layout>
-        <Grid container spacing={3}>
-          {guilds.map((guild) => (
-              <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={3}
-                  align={"center"}
-                  justify={"center"}
-                  key={guild.id}
-                  href={"/guilds/" + guild.id}
-                  component={"a"}
-              >
-                <img
-                    src={
-                      guild.icon !== null
-                          ? discordCDNBase +
-                          guild.id +
-                          "/" +
-                          guild.icon +
-                          ".webp"
-                          : skBlackAndWhiteAvatar
-                    }
-                    alt={guild.name}
-                />
-              </Grid>
+    <Layout>
+      <Grid container spacing={3}>
+        {!guilds && <div>No Servers</div>}
+        {guilds &&
+          guilds.map((guild) => (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              align={"center"}
+              justify={"center"}
+              key={guild.id}
+              href={"/guilds/" + guild.id}
+              component={"a"}
+            >
+              <img
+                src={
+                  guild.icon !== null
+                    ? discordCDNBase + guild.id + "/" + guild.icon + ".webp"
+                    : skBlackAndWhiteAvatar
+                }
+                alt={guild.name}
+              />
+            </Grid>
           ))}
-        </Grid>
-      </Layout>
+      </Grid>
+    </Layout>
   );
 }
