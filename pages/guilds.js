@@ -8,19 +8,32 @@ import styles from "../styles/Home.module.css";
 import MaterialTable from "material-table";
 import { theme } from "../theme/table-theme";
 import {
-  MuiThemeProvider,
-  Box,
-  Paper,
-  Avatar,
-  GridList,
-  GridListTile,
-  GridListTileBar,
+    MuiThemeProvider,
+    Box,
+    Paper,
+    Avatar,
+    GridList,
+    GridListTile,
+    GridListTileBar, Grid,
 } from "@material-ui/core";
 import React from "react";
 
 const discordCDNBase = "https://cdn.discordapp.com/icons/";
 const skBlackAndWhiteAvatar =
-  "https://cdn.discordapp.com/avatars/296718635513413632/52b80dbbe9ece30338ecc3733934795b.webp?size=1024";
+  "https://cdn.discordapp.com/avatars/296718635513413632/52b80dbbe9ece30338ecc3733934795b.webp";
+
+
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//         flexGrow: 1,
+//     },
+//     paper: {
+//         padding: theme.spacing(2),
+//         textAlign: 'center',
+//         color: theme.palette.text.secondary,
+//     },
+// }));
+
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -39,9 +52,10 @@ export default function Page() {
 
   return (
     <Layout>
-      <GridList theme={theme} spacing={60}>
+      <Grid container spacing={3}
+            alignItems="center" justify="center">
         {guilds.map((guild) => (
-          <GridListTile
+          <Grid item xs
             key={guild.id}
             href={"/guilds/" + guild.id}
             component={"a"}
@@ -53,18 +67,14 @@ export default function Page() {
                     guild.id +
                     "/" +
                     guild.icon +
-                    ".webp?size=1024"
+                    ".webp"
                   : skBlackAndWhiteAvatar
               }
               alt={guild.name}
             />
-            <GridListTileBar
-              title={guild.name}
-              href="https://dyno.gg/account"
-            />
-          </GridListTile>
+          </Grid>
         ))}
-      </GridList>
+      </Grid>
     </Layout>
   );
 }
