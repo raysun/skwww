@@ -14,8 +14,10 @@ import {
   Avatar,
   GridList,
   GridListTile,
-  GridListTileBar,
   Grid,
+  GridListTileBar,
+  Typography,
+  Button
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
@@ -23,6 +25,7 @@ import React from "react";
 const discordCDNBase = "https://cdn.discordapp.com/icons/";
 const skBlackAndWhiteAvatar =
   "https://cdn.discordapp.com/avatars/296718635513413632/52b80dbbe9ece30338ecc3733934795b.webp";
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -55,31 +58,34 @@ export default function Page() {
   console.log(guilds);
 
   return (
-    <Layout>
-      <Grid container spacing={3}>
-        {!guilds && <div>No Servers</div>}
-        {guilds &&
-          guilds.map((guild) => (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={3}
-              align={"center"}
-              justify={"center"}
-              key={guild.id}
-              href={"/guilds/" + guild.id}
-              component={"a"}
-            >
-              <img
-                src={
-                  guild.icon !== null
-                    ? discordCDNBase + guild.id + "/" + guild.icon + ".webp"
-                    : skBlackAndWhiteAvatar
-                }
-                alt={guild.name}
-              />
-            </Grid>
+      <Layout>
+        <Grid container spacing={3} sm={6} md={6} xl={6} align={"center"} justify={"center"}>
+          {!guilds && <div>No Servers</div>}
+          {guilds &&
+            guilds.map((guild) => (
+              <Button
+                  key={guild.id}>
+                <Grid item>
+                  <Grid item>
+                    <Button href={"/guilds/" + guild.id}>
+                        <img src={
+                          guild.icon !== null
+                              ? discordCDNBase +
+                              guild.id +
+                              "/" +
+                              guild.icon +
+                              ".webp"
+                              : skBlackAndWhiteAvatar
+                        }
+                        alt={guild.name}
+                    />
+                  </Button>
+                  </Grid>
+                  <Grid>
+                    <Typography>{guild.name}</Typography>
+                  </Grid>
+                </Grid>
+              </Button>
           ))}
       </Grid>
     </Layout>
