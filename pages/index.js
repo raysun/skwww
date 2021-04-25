@@ -59,7 +59,7 @@ export default function Page() {
 
   return (
       <Layout>
-        <Grid container spacing={3} sm={6} md={8} xl={8} align={"center"} justify={"center"}>
+        <Grid container spacing={3} sm={6} md={6} xl={6} align={"center"} justify={"center"}>
           {!guilds && <div>No Servers</div>}
           {guilds &&
             guilds.map((guild) => (
