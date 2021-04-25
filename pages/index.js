@@ -14,7 +14,7 @@ import {
   Avatar,
   GridList,
   GridListTile,
-  GridListTileBar, Grid,
+  GridListTileBar, Grid, Typography, Button
 } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import React from "react";
@@ -60,32 +60,34 @@ export default function Page() {
 
   return (
       <Layout>
-        <Grid container spacing={3}>
+        <Grid container spacing={3}
+              sm={6}
+              md={8} xl={8}               align={"center"}
+              justify={"center"}>
           {guilds.map((guild) => (
-              <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={3}
-                  align={"center"}
-                  justify={"center"}
-                  key={guild.id}
-                  href={"/guilds/" + guild.id}
-                  component={"a"}
-              >
-                <img
-                    src={
-                      guild.icon !== null
-                          ? discordCDNBase +
-                          guild.id +
-                          "/" +
-                          guild.icon +
-                          ".webp"
-                          : skBlackAndWhiteAvatar
-                    }
-                    alt={guild.name}
-                />
-              </Grid>
+              <Button
+                  key={guild.id}>
+                <Grid item>
+                  <Grid item>
+                    <Button href={"/guilds/" + guild.id}>
+                        <img src={
+                          guild.icon !== null
+                              ? discordCDNBase +
+                              guild.id +
+                              "/" +
+                              guild.icon +
+                              ".webp"
+                              : skBlackAndWhiteAvatar
+                        }
+                        alt={guild.name}
+                    />
+                  </Button>
+                  </Grid>
+                  <Grid>
+                    <Typography>{guild.name}</Typography>
+                  </Grid>
+                </Grid>
+              </Button>
           ))}
         </Grid>
       </Layout>
