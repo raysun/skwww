@@ -50,7 +50,7 @@ export default function Header() {
             </Grid>
           )}
           {session && (
-            <Grid item container justify="flex-end">
+            <Grid item container justify="flex-end" alignItems="center">
               <Grid item>
                 {session.user.image && (
                   <Avatar
@@ -60,8 +60,6 @@ export default function Header() {
                 )}
               </Grid>
               <Grid item>
-                <small>Signed in as</small>
-                <br />
                 <strong>{session.user.name}</strong>
               </Grid>
               <Grid item>
