@@ -39,8 +39,23 @@ export default function Header() {
     <>
       <Toolbar>
         <Typography variant="h5" className={classes.title}>
-          Clash Sidekick
+          <Link href="/">Clash Sidekick</Link>
         </Typography>
+        <li className={styles.navItem}>
+          <Link href="/clan">
+            <a>Clan</a>
+          </Link>
+        </li>
+        <li className={styles.navItem}>
+          <Link href="/me">
+            <a>Me</a>
+          </Link>
+        </li>
+        <li className={styles.navItem}>
+          <Link href="/autoping">
+            <a>Autoping</a>
+          </Link>
+        </li>
         {session && session.user.image && (
           <Avatar className={styles.avatar} src={session.user.image}></Avatar>
         )}
@@ -48,7 +63,6 @@ export default function Header() {
         <Button
           color="inherit"
           href={`/api/auth/signin`}
-          className={styles.buttonPrimary}
           onClick={(e) => {
             e.preventDefault();
             session ? signOut() : signIn("discord");
@@ -57,51 +71,6 @@ export default function Header() {
           {session ? "Logout" : "Login"}
         </Button>
       </Toolbar>
-      <nav>
-        <ul className={styles.navItems}>
-          {/* <li className={styles.navItem}>
-            <Link href="/">
-              <a>Home</a>
-            </Link>
-          </li> */}
-          <li className={styles.navItem}>
-            <Link href="/">
-              <a>Guilds</a>
-            </Link>
-          </li>
-          {/* <li className={styles.navItem}>
-            <Link href="/client">
-              <a>Client</a>
-            </Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/server">
-              <a>Server</a>
-            </Link>
-          </li> */}
-          <li className={styles.navItem}>
-            <Link href="/clan">
-              <a>Clan</a>
-            </Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/me">
-              <a>Me</a>
-            </Link>
-          </li>
-          <li className={styles.navItem}>
-            <Link href="/autoping">
-              <a>Autoping</a>
-            </Link>
-          </li>
-
-          {/* <li className={styles.navItem}>
-            <Link href="/api-example">
-              <a>API</a>
-            </Link>
-          </li> */}
-        </ul>
-      </nav>
     </>
   );
 }
