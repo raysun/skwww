@@ -36,84 +36,27 @@ export default function Header() {
   const [session, loading] = useSession();
 
   return (
-    <Toolbar>
-      <Typography variant="h5" className={classes.title}>
-        Clash Sidekick
-      </Typography>
-      {session && session.user.image && (
-        <Avatar className={styles.avatar} src={session.user.image}></Avatar>
-      )}
-      <strong>{session && session.user.name}</strong>
-      <Button
-        color="inherit"
-        href={`/api/auth/signin`}
-        className={styles.buttonPrimary}
-        onClick={(e) => {
-          e.preventDefault();
-          session ? signOut() : signIn("discord");
-        }}
-      >
-        {session ? "Logout" : "Login"}
-      </Button>
-    </Toolbar>
-  );
-  return (
-    <header>
-      <p
-        className={`nojs-show ${
-          !session && loading ? styles.loading : styles.loaded
-        }`}
-      >
-        <Grid container>
-          <Grid className={styles.title} item>
-            Clash Sidekick
-          </Grid>
-          {!session && (
-            <Grid item container justify="flex-end">
-              <Grid item>You are not signed in</Grid>
-              <Grid item>
-                <a
-                  href={`/api/auth/signin`}
-                  className={styles.buttonPrimary}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signIn("discord");
-                  }}
-                >
-                  Sign in
-                </a>
-              </Grid>
-            </Grid>
-          )}
-          {session && (
-            <Grid item container justify="flex-end" alignItems="center">
-              <Grid item>
-                {session.user.image && (
-                  <Avatar
-                    className={styles.avatar}
-                    src={session.user.image}
-                  ></Avatar>
-                )}
-              </Grid>
-              <Grid item>
-                <strong>{session.user.name}</strong>
-              </Grid>
-              <Grid item>
-                <a
-                  href={`/api/auth/signout`}
-                  className={styles.button}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    signOut();
-                  }}
-                >
-                  Sign out
-                </a>
-              </Grid>
-            </Grid>
-          )}
-        </Grid>
-      </p>
+    <>
+      <Toolbar>
+        <Typography variant="h5" className={classes.title}>
+          Clash Sidekick
+        </Typography>
+        {session && session.user.image && (
+          <Avatar className={styles.avatar} src={session.user.image}></Avatar>
+        )}
+        <strong>{session && session.user.name}</strong>
+        <Button
+          color="inherit"
+          href={`/api/auth/signin`}
+          className={styles.buttonPrimary}
+          onClick={(e) => {
+            e.preventDefault();
+            session ? signOut() : signIn("discord");
+          }}
+        >
+          {session ? "Logout" : "Login"}
+        </Button>
+      </Toolbar>
       <nav>
         <ul className={styles.navItems}>
           {/* <li className={styles.navItem}>
@@ -159,6 +102,6 @@ export default function Header() {
           </li> */}
         </ul>
       </nav>
-    </header>
+    </>
   );
 }
